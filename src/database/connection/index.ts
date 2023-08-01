@@ -13,7 +13,7 @@ let dbUrl: any
 // else dbUrl = config.get('clear')
 
 mongoose.connect(
-    dbUrl,
+    "mongodb+srv://jeetsemicolon:jeet@0407@cluster0.u8l7t8f.mongodb.net/PassportPals",
     {
         useNewUrlParser: true,
         useCreateIndex: true,
