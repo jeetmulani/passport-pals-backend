@@ -9,6 +9,7 @@
     "start": "node build/server.js",
     "dist": "sh ./scripts/build.sh",
     "ebs": "start ebs.bat",
+    "build1": "tsc-watch --outDir ./build --onSuccess",
     "server": "tsc-watch --outDir ./build --onSuccess \"npm run start -- --mode=http\" --onFailure \"echo ERROR! Compilation Failed\""
   },
   "author": "",
