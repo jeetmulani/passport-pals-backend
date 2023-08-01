@@ -12,13 +12,6 @@ let dbUrl: any
 // if (!process.env.NODE_ENV) dbUrl = config.get('db_url')
 // else dbUrl = config.get('clear')
 
-let connection = mongoose.createConnection('mongodb+srv://jeetsemicolon:jeet@0407@cluster0.u8l7t8f.mongodb.net/PassportPals',
-    {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-    })
 mongoose.connect(
     dbUrl,
     {
@@ -28,6 +21,5 @@ mongoose.connect(
         useFindAndModify: false,
     }
 ).then(result => console.log('Database successfully connected')).catch(err => console.log(err))
-autoIncrement.initialize(connection)
 
 export { mongooseConnection, autoIncrement }
