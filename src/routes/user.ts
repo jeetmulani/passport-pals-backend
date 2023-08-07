@@ -17,6 +17,7 @@ router.post('/change_password', validation.change_password, userController.chang
 
 // ---------  tour Model -----------
 router.get('/get/tour', userController?.get_tour)
+router.get('/get/tour/:id', userController?.get_tour_by_id)
 
 // --------- booking Modal ----------
 router.post('/add/booking', userController?.add_booking)
