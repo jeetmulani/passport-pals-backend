@@ -11,7 +11,7 @@ export const add_contactUs = async (req: Request, res: Response) => {
     try {
         let user: any = req.header('user');
         let body = req.body
-        body.createdBy = user._ids
+        body.createdBy = user._id
         let response = await new contactUsModel(body).save()
         if (response) return res.status(200).json(await apiResponse(200, responseMessage.addDataSuccess('booking'), response, {}));
         else return res.status(401).json(await apiResponse(401, responseMessage.addDataError, {}, {}));

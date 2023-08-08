@@ -6,7 +6,7 @@ import { userJWT } from '../helpers';
 const router = express.Router();
 
 
-// router.use(userJWT);
+router.use(userJWT);
 
 
 //  ------------------ profile Model ----------------
