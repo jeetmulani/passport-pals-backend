@@ -31,7 +31,7 @@ export const update_profile = async (req: Request, res: Response) => {
     body = req.body
   try {
     if (body.email != null) {
-      let isAlready = await userModel.findOne({ email: body.email, isActive: true, isBolck: true })
+      let isAlready: any = await userModel.findOne({ email: body.email, isActive: true, isBlock: false })
       if (isAlready && !isAlready._id.equals(id)) {
         return res.status(403).json(await apiResponse(403, 'email Already Exist!', {}, {}))
       }
