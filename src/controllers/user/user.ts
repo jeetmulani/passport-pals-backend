@@ -4,6 +4,8 @@ import { apiResponse } from '../../common'
 import bcryptjs from 'bcryptjs'
 import { Request, Response } from 'express'
 import { userModel } from '../../database/models'
+import url from 'url';
+import { deleteImage } from '../../helpers/CloudinaryImage'
 
 const ObjectId = require('mongoose').Types.ObjectId
 
@@ -35,6 +37,14 @@ export const update_profile = async (req: Request, res: Response) => {
       }
     }
     let response = await userModel.findOneAndUpdate({ _id: ObjectId(id), isActive: true }, body)
+    if (body?.profileImage != response?.profileImage && response.profileImage != null && body?.profileImage != null && body?.profileImage != undefined) {
+      let profileImage = response?.profileImage
+      const cloudinaryParts = url.parse(response?.profileImage, true).pathname?.split('/');
+      const imageName = cloudinaryParts?.pop();
+      const folderName = cloudinaryParts?.pop();
+      const publicId = profileImage.split('/').slice(-1)[0].split('.')[0];
+      await deleteImage(folderName, publicId)
+    }
     if (response) {
       return res.status(200).json(await apiResponse(200, 'User profile updated successfully!', {}, {}))
     } else {
@@ -43,6 +53,22 @@ export const update_profile = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
 
+    return res.status(500).json(await apiResponse(500, 'Internal Server Error', {}, {}))
+  }
+}
+
+export const match_OldPssword = async (req: Request, res: Response) => {
+  reqInfo(req)
+  let user: any = req.header('user'),
+    { old_password } = req.body
+  try {
+    let user_data = await userModel.findOne({ _id: ObjectId(user._id), isActive: true }).select('password')
+
+    const passwordMatch = await bcryptjs.compare(old_password, user_data.password)
+    if (!passwordMatch) return res.status(400).json(await apiResponse(400, 'Old password is wrong', {}, {}));
+    else return res.status(200).json(await apiResponse(200, "password are matched...!", {}, {}))
+  } catch (error) {
+    console.log(error)
     return res.status(500).json(await apiResponse(500, 'Internal Server Error', {}, {}))
   }
 }

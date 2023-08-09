@@ -1,0 +1,10 @@
+"use strict";
+import { Router } from "express";
+import { } from "../helpers";
+import * as validation from "../validation";
+import { uploadImage } from "../helpers/CloudinaryImage";
+import { multerUpload } from "../helpers/CloudinaryImage";
+const router = Router();
+// router.post("/image:folder_name", multerUpload.array("image", 10), uploadImage);
+router.post("/image/:folder_name", validation?.file_type, multerUpload.array("image"), uploadImage);
+export const uploadRouter = router;

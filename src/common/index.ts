@@ -13,3 +13,5 @@ export const userStatus = {
     admin: "admin",
     upload: "upload"
 }
+
+export const image_folder = ['profile_image']

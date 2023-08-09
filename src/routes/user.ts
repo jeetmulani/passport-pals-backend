@@ -12,6 +12,7 @@ const router = express.Router();
 //  ------------------ profile Model ----------------
 router.get('/get_profile', userJWT, userController?.get_profile)
 router.put('/update_profile', userJWT, validation.update_profile, userController?.update_profile)
+router.post('/match_OldPssword', userJWT, validation.match_OldPssword, userController?.match_OldPssword)
 router.post('/change_password', userJWT, validation.change_password, userController.change_password)
 
 
