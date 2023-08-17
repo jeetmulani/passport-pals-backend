@@ -14,7 +14,7 @@ export const get_profile = async (req: Request, res: Response) => {
   reqInfo(req)
   let user: any = req.header('user')
   let { id } = user._id
-  try {
+  try {  
     let response = await userModel.findOne({ _id: ObjectId(id), isActive: true, isBlock: false })
     console.log("res:-",response);
     
