@@ -16,6 +16,8 @@ export const get_profile = async (req: Request, res: Response) => {
   let { id } = user._id
   try {
     let response = await userModel.findOne({ _id: ObjectId(id), isActive: true, isBlock: false })
+    console.log("res:-",response);
+    
     if (response) return res.status(200).json(await apiResponse(200, 'user get profile successfully', response, {}))
     else return res.status(501).json(await apiResponse(501, 'Oops! Something went wrong!', {}, {}))
   } catch (error) {
