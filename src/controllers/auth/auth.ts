@@ -63,6 +63,7 @@ export const login = async (req: Request, res: Response) => {
             name: response?.name,
             email: response?.email,
             mobileNumber: response?.mobileNumber,
+            profileImage: response?.profileImage,
             token,
             refresh_token
         }
